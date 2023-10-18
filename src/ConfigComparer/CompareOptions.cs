@@ -24,5 +24,39 @@ namespace ConfigComparer
 
         [Option('n', "no-values", HelpText = "If set, values are not shown.")]
         public bool NoValues { get; set; }
+
+        [Usage(ApplicationAlias = "dotnet tool run config-comparer")]
+        public static IEnumerable<Example> Examples
+        {
+            get
+            {
+                return new List<Example>() {
+                    new Example(
+                        "Compare two folders", 
+                        new CompareOptions { 
+                            LeftDirectory = "c:\\project-a", 
+                            RightDirectory = "c:\\project-b", 
+                            Files = new string[] { "appsettings.json", "appsettings.Production.json" } 
+                        }),
+                    new Example(
+                        "Compare two folders. Show only differences",
+                        new CompareOptions {
+                            LeftDirectory = "c:\\project-a",
+                            RightDirectory = "c:\\project-b",
+                            SkipSame = true,
+                            Files = new string[] { "appsettings.json", "appsettings.Production.json" }
+                        }),
+                    new Example(
+                        "Compare two folders. Show only differences and hide real values",
+                        new CompareOptions {
+                            LeftDirectory = "c:\\project-a",
+                            RightDirectory = "c:\\project-b",
+                            SkipSame = true,
+                            NoValues = true,
+                            Files = new string[] { "appsettings.json", "appsettings.Production.json" }
+                        })
+                };
+            }
+        }
     }
 }

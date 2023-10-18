@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ConfigComparer
 {
@@ -21,31 +23,28 @@ namespace ConfigComparer
         {
             Queue<IConfigurationSection> sections = new();
 
-            bool EnqueueChildren(IEnumerable<IConfigurationSection> children)
+            IEnumerable<KeyValuePair<string, string>> VisitChildren(IEnumerable<IConfigurationSection> children)
             {
-                bool any = false;
                 foreach (var child in children.OrderBy(s => s.Key))
                 {
-                    any = true;
-                    sections.Enqueue(child);
+                    bool any = false;
+                    foreach (var item in VisitChildren(child.GetChildren()))
+                    {
+                        yield return item;
+                        any = true;
+                    }
+
+                    if (!any)
+                    {
+                        // no children - return value
+                        // - no matter if that is null or not as this is leaf node)
+                        yield return new KeyValuePair<string, string>(child.Path, child.Value);
+                        continue;
+                    }
                 }
-                return any;
             }
 
-            EnqueueChildren(configuration.GetChildren());
-
-            while(sections.TryDequeue(out IConfigurationSection section))
-            {
-                if(EnqueueChildren(section.GetChildren()))
-                {
-                    // has any children? continue
-                    continue;
-                }
-
-                // no children - return value
-                // - no matter if that is null or not as this is leaf node)
-                yield return new KeyValuePair<string, string>(section.Path, section.Value);
-            }
+            return VisitChildren(configuration.GetChildren());
         }
     }
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConfigComparer": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\cbdata\\KeyHub\\src\\CbData.KeyHub.Api\\ C:\\cbdata\\cbCapNetCore\\src\\cbCap.Api\\ appsettings.json appsettings.Production.json"
+    }
+  }
+}

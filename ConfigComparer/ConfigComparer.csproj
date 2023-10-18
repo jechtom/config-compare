@@ -4,10 +4,11 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.0.1</Version>
 
-	<PackAsTool>true</PackAsTool>
-	<ToolCommandName>config-comparer</ToolCommandName>
-	<PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>config-comparer</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

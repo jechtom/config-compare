@@ -15,9 +15,9 @@ USAGE:
 Compare two folders:
   dotnet tool run config-comparer c:\project-a c:\project-b appsettings.json appsettings.Production.json
 Compare two folders. Show only differences:
-  dotnet tool run config-comparer --skip-same c:\project-a c:\project-b appsettings.json appsettings.Production.json
+  config-comparer --skip-same c:\project-a c:\project-b appsettings.json appsettings.Production.json
 Compare two folders. Show only differences and hide real values:
-  dotnet tool run config-comparer --no-values --skip-same c:\project-a c:\project-b appsettings.json appsettings.Production.json
+  config-comparer --no-values --skip-same c:\project-a c:\project-b appsettings.json appsettings.Production.json
 
   -s, --skip-same    If set, only non-equal configuration is printed.
 

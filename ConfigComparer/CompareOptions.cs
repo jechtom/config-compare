@@ -25,7 +25,7 @@ namespace ConfigComparer
         [Option('n', "no-values", HelpText = "If set, values are not shown.")]
         public bool NoValues { get; set; }
 
-        [Usage(ApplicationAlias = "dotnet tool run config-comparer")]
+        [Usage(ApplicationAlias = "config-comparer")]
         public static IEnumerable<Example> Examples
         {
             get
